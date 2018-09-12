@@ -15,7 +15,7 @@
 	<!-- loading animation graphic -->
 	<hotspot name="loadinganimation"
 	         keep="true"
-	         visible="false"
+	         visible="true"
 	         flying="1.0"
 	         url="loadinganimation.png"
 	         crop="0|0|64|64"
@@ -30,25 +30,56 @@
 	</action>
 
 	<action name="loadinganimation_stoploading">
-	<!-- 当场景加载完成之后执行动画 -->
-		tween(view.fisheye,       0.0, distance(1.0,2));
-		tween(view.fov,           90, distance(150,2));
-		tween(view.vlookat,        0, distance(90,2));
-		add(new_hlookat, view.hlookat, 123.0);
-		tween(view.hlookat, get(new_hlookat), distance(100,2.5);
 		set(loadinganimation_isloading, false);
 		set(hotspot[loadinganimation].visible, false);
+	<!-- 当场景加载完成之后执行动画 -->
+		<!-- set(view.fisheye,	1.0);
+		set(view.vlookat,	90);
+		set(view.fov,	150); -->
+		<!-- 添加一个定时当场景加载完成之后，改变view 属性值，等待1S做动画； -->
+		delayedcall(1,
+		tween(view.fisheye,       0.0, distance(1.0,2));
+		tween(view.fov,           90, distance(150,2));
+		tween(view.vlookat,        0, distance(100,2));
+		add(new_hlookat, view.hlookat, 123.0);
+		tween(view.hlookat, get(new_hlookat), distance(100,2.5));
+		);
 	</action>
-	<action name="loadinganimation_animate">
 
+	<action name="loadinganimation_animate">
 		mul(xcrop, hotspot[loadinganimation].frame, 64);
 		txtadd(hotspot[loadinganimation].crop, get(xcrop), '|0|64|64');
-
 		if(loadinganimation_isloading,
 			inc(hotspot[loadinganimation].frame);
 			if(hotspot[loadinganimation].frame GE hotspot[loadinganimation].frames, set(hotspot[loadinganimation].frame,0));
 			delayedcall(0.05, loadinganimation_animate() );
 		  );
+	</action>
+
+	<action name="litter_planet_animation" type="Javascript">
+		<!-- 当场景加载完成之后执行动画 -->
+		set(view.fisheye,	1.0);
+		set(view.vlookat,	90);
+		set(view.fov,	150);
+		<!-- 添加一个定时当场景加载完成之后，改变view 属性值，等待1S做动画； -->
+		delayedcall(1,
+		tween(view.fisheye,       0.0, distance(1.0,2));
+		tween(view.fov,           90, distance(150,2));
+		tween(view.vlookat,        0, distance(100,2));
+		<!-- 编辑器导出的场景初始角度 new_hlookat -->
+		add(new_hlookat, view.hlookat, 123.0);     
+		tween(view.hlookat, get(new_hlookat), distance(100,2.5));
+		);
+		
+	</action>
+
+
+	<action name="move_90degree_animation">
+		<!-- 当场景加载完成之后执行动画 -->
+		<!-- 获取到当前view的值，然后通过旋转90°到达用户在编辑器中设置的起始位置； -->
+
+	set(view.hlookat,	0);
+	tween(view.hlookat,       90, distance(100,2));
 	</action>
 
 </krpano>

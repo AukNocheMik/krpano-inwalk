@@ -1,6 +1,6 @@
 var http=require('http');
 var fs=require('fs');
-var root="D:/nodeproject/krpano-inwalk/inwalk/"
+var root="D:/nodeproject/github-project/krpano-inwalk/"
 //开启服务
 var server=http.createServer(function(req,res){
     var url=req.url;

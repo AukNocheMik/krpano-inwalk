@@ -8,7 +8,7 @@
 	</action>
 	<scene>
 	<!-- view/fov settings -->
-	<view hlookat="180" vlookat="90" fov="150" Fisheye="1.0"/>
+	<view hlookat="0" vlookat="90" fov="150" Fisheye="1.0"/>
 	<preview url="https://krpano.com/tours/corfu/panos/achilleion-hof-unten.tiles/preview.jpg"/>
 	<image>
 		<cube url="https://krpano.com/tours/corfu/panos/achilleion-hof-unten.tiles/pano_%s.jpg?nocache=%$random%" devices="tablet|desktop" />
