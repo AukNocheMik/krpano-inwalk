@@ -1,0 +1,54 @@
+﻿<!--
+	loading animation with an image-strip / sprite-sheet
+	- made as 'flying' hotspots
+	- works also in VR mode
+	- just include once this xml
+-->
+<krpano>
+
+	<!-- loading animation events -->
+	<events name="loadinganimation" keep="true"
+	        onxmlcomplete="loadinganimation_startloading();"
+	        onloadcomplete="delayedcall(0.25, loadinganimation_stoploading() );"
+	        />
+
+	<!-- loading animation graphic -->
+	<hotspot name="loadinganimation"
+	         keep="true"
+	         visible="false"
+	         flying="1.0"
+	         url="loadinganimation.png"
+	         crop="0|0|64|64"
+	         frame="0" frames="8"
+	         />
+
+	<!-- loading percent actions -->
+	<action name="loadinganimation_startloading">
+		set(loadinganimation_isloading, true);
+		set(hotspot[loadinganimation].visible, true);
+		loadinganimation_animate();
+	</action>
+
+	<action name="loadinganimation_stoploading">
+	<!-- 当场景加载完成之后执行动画 -->
+		tween(view.fisheye,       0.0, distance(1.0,2));
+		tween(view.fov,           90, distance(150,2));
+		tween(view.vlookat,        0, distance(90,2));
+		add(new_hlookat, view.hlookat, 123.0);
+		tween(view.hlookat, get(new_hlookat), distance(100,2.5);
+		set(loadinganimation_isloading, false);
+		set(hotspot[loadinganimation].visible, false);
+	</action>
+	<action name="loadinganimation_animate">
+
+		mul(xcrop, hotspot[loadinganimation].frame, 64);
+		txtadd(hotspot[loadinganimation].crop, get(xcrop), '|0|64|64');
+
+		if(loadinganimation_isloading,
+			inc(hotspot[loadinganimation].frame);
+			if(hotspot[loadinganimation].frame GE hotspot[loadinganimation].frames, set(hotspot[loadinganimation].frame,0));
+			delayedcall(0.05, loadinganimation_animate() );
+		  );
+	</action>
+
+</krpano>

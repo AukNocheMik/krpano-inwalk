@@ -1,0 +1,30 @@
+﻿<krpano>
+	<include url="nadir-logo.xml" />
+	<include url="plugins/combobox.xml" />
+	<!-- grid preview pano -->
+		<action name="comboboxexamples" autorun="onstart">
+		loadscene(0);  
+		<!-- loadscene(1); 90旋转效果 -->
+	</action>
+	<scene>
+	<!-- view/fov settings -->
+	<view hlookat="180" vlookat="90" fov="150" Fisheye="1.0"/>
+	<preview url="https://krpano.com/tours/corfu/panos/achilleion-hof-unten.tiles/preview.jpg"/>
+	<image>
+		<cube url="https://krpano.com/tours/corfu/panos/achilleion-hof-unten.tiles/pano_%s.jpg?nocache=%$random%" devices="tablet|desktop" />
+		<cube url="https://krpano.com/tours/corfu/panos/achilleion-hof-unten.tiles/mobile_%s.jpg?nocache=%$random%" devices="mobile" />
+	</image>
+	</scene>
+
+		<scene>
+	<!-- view/fov settings -->
+	<view hlookat="0" vlookat="0" fov="90"/>
+	<preview url="https://krpano.com/tours/corfu/panos/achilleion-hof-unten.tiles/preview.jpg"/>
+	<image>
+		<cube url="https://krpano.com/tours/corfu/panos/achilleion-hof-unten.tiles/pano_%s.jpg?nocache=%$random%" devices="tablet|desktop" />
+		<cube url="https://krpano.com/tours/corfu/panos/achilleion-hof-unten.tiles/mobile_%s.jpg?nocache=%$random%" devices="mobile" />
+	</image>
+	</scene>
+	<!-- <plugin name="threejs" url="three.krpanoplugin.js" keep="true" />  模型插件，打开可以加载模型        -->
+
+</krpano>

@@ -1,0 +1,60 @@
+﻿<!--
+	krpano - rotating nadir logo example
+-->
+<krpano>
+	<include url="loadinganimation.xml" />
+	<include url="loadingpercenttext.xml" />
+	<include url="loadingbar.xml" />
+	<!-- startup viewing direction and angle -->
+	<!-- nadir logo (a distorted hotspot) -->
+	<hotspot name="nadirlogo" keep="true"
+	         url="krpano-roundlogo.png"
+	         ath="0"
+	         atv="90"
+	         distorted="false"
+	         scale="1.0"
+	         rotate="0.0"	
+	         onclick="openurl('http://krpano.com');"
+	         />
+
+	<hotspot name="spot1" url="animatedhotspot_white.png" distorted="false" onloaded="do_crop_animation(64,64, 60);"   ath="-15" atv="-12" onclick="looktohotspot(get(name),65);" />
+	<!-- onviewchange event - update logo rotation on pano rotation -->
+	<events name="nadirlogo" keep="true" onviewchange="copy(hotspot[nadirlogo].rotate);" />
+
+		<action name="do_crop_animation" scope="local" args="framewidth, frameheight, framerate">
+		<!-- define local variables -->
+		calc(local.xframes, (caller.imagewidth /framewidth) BOR 0);
+		calc(local.frames, xframes * ((caller.imageheight / frameheight) BOR 0));
+		def(local.frame, integer, 0);
+		
+		<!-- set the first frame -->
+		calc(caller.crop, '0|0|' + framewidth + '|' + frameheight);
+		
+		<!-- do the animation -->
+		setinterval(calc('crop_anim_' + caller.name), calc(1.0 / framerate),
+			if(caller.loaded,
+				inc(frame);
+				if(frame GE frames, if(caller.onlastframe !== null, callwith(caller, onlastframe() ) ); set(frame,0); );
+				mod(xpos, frame, xframes);
+				div(ypos, frame, xframes);
+				Math.floor(ypos);
+				mul(xpos, framewidth);
+				mul(ypos, frameheight);
+				calc(caller.crop, xpos + '|' + ypos + '|' + framewidth + '|' + frameheight);
+			  ,
+				<!-- stop the interval when the hotspot gets removed -->
+				clearinterval(calc('crop_anim_' + caller.name));
+			);
+		);
+	</action>
+		<layer name="reloadbutton"
+	       url="%SWFPATH%/plugins/textfield.swf"
+	       backgroundcolor="0x2D3E50" backgroundalpha="0.8" roundedge="1"
+	       shadow="2" shadowrange="4" shadowcolor="0x000000"
+	       css="text-align:center; color:#FFFFFF; font-family:Arial; font-size:14px;"
+	       html="Reload Pano[br][font size='10px' style='font-size:12px;'](without cache)[/font]"
+	       padding="6 10"
+	       align="bottom" y="40"
+	       onclick="set(basedir,''); loadpano(get(xml.url),null,KEEPALL);"
+	       />
+</krpano>

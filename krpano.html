@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>krpano</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta http-equiv="x-ua-compatible" content="IE=edge" />
+	<style>
+		@-ms-viewport { width:device-width; }
+		@media only screen and (min-device-width:800px) { html { overflow:hidden; } }
+		html { height:100%; }
+		body { height:100%; overflow:hidden; margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#FFFFFF; background-color:#000000; }
+	* {
+    font-size:12px;
+    font-family:宋体, Arial;
+} /*规定了所有的字体样式*/
+body {
+    overflow:auto;
+}
+#mq {
+    line-height:20px;
+    overflow:hidden;
+    border:1px solid black;
+	display:block;
+	top:-974px;
+	
+}
+#mq div {
+    position:absolute;
+    width:1920px;
+	font-size:14px;
+	background-color:rgba(0,0,0,0.5);
+	color:red;
+}
+
+	</style>
+	<script src="./uiControls.js"></script>
+	<script src="./xmlControls.js"></script>
+</head>
+<body>
+
+<script src="krpano.js"></script>
+
+<div id="pano" style="width:100%;height:100%;display:block">
+	<noscript><table style="width:100%;height:100%;"><tr style="vertical-align:middle;text-align:center;"><td>ERROR:<br><br>Javascript not activated<br><br></td></tr></table></noscript>
+	<script>
+		embedpano({swf:"krpano.swf", xml:"krpano.xml", target:"pano", html5:"auto", mobilescale:1.0, passQueryParameters:true});
+	</script>
+	<div id="mq">
+	<div> 深圳市智能现实科技有限公司（简称 智现实 ）成立于 2016 年 7 月，创始团队在 VR 视频和图像处理、AI 视频图像识别、硬件成像和传感器等领域掌握核心算法和关键技术，有极强的研发能力，具备互联网产品开发经验，对泛 VR 产业链非常熟悉，具有丰富的行业资源。</div>
+</div>
+</div>
+
+
+</body>
+</html>
