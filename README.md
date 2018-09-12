@@ -1,0 +1,2 @@
+# krpano-inwalk
+krpanoProject
